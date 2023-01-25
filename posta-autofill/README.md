@@ -14,8 +14,9 @@ and pressing a single button to fill out this whole form.
 
 1. Use Chrome or any other browser that supports Tampermonkey (or something similar). Install Tampermonkey https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en
 2. Click the Tampermonkey icon in Chrome and select "Create a new script..."
-3. Overwrite it with the contents of https://github.com/SevenIndirecto/utils/blob/master/posta-autofill/shipper.js and save.
-4. That should be it.
+3. Overwrite it with the contents of https://github.com/SevenIndirecto/utils/blob/master/posta-autofill/shipper.js 
+4. Input your own address in under the `// Personalize here` section (between `"..."`) and save.
+5. That should be it.
 
 ## Usage
 
