@@ -1,5 +1,7 @@
 # Posta.si IMPORT/EXPORT auto filler
 
+![Preview](https://raw.githubusercontent.com/SevenIndirecto/utils/master/posta-autofill/chrome_sVfdIzXvXy.gif)
+
 Sanity warning, extremely niche. 
 Are you using CardMarket.eu and shipping registered packages via https://uvoz-izvoz.posta.si/en/export/shipment? This script can automate this annoying form just for you (and me).
 
