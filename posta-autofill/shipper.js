@@ -4,7 +4,7 @@
 // @version      0.1
 // @description  Autofill Import Exporta at posta.si for CMC shipping
 // @author       Seven
-// @match        https://uvoz-izvoz.posta.si/en/export/shipment/edit
+// @match        https://uvoz-izvoz.posta.si/en/export/shipment/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        none
 // ==/UserScript==
