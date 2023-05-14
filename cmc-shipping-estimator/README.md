@@ -12,4 +12,4 @@ This script automatically adds shipping estimates to the Singles page on CardMar
 
 ## Usage
 
-When viewing the the /en/Magic/Products/Singles/* pages like https://www.cardmarket.com/en/Magic/Products/Singles/Visions/Chronatog you'll see shipping estimates.
+When viewing /en/Magic/Products/Singles/* pages like https://www.cardmarket.com/en/Magic/Products/Singles/Visions/Chronatog you'll see shipping estimates.
