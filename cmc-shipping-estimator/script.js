@@ -100,7 +100,7 @@
     }
 
     // On load
-    processUnmodifiedRows();
+    setTimeout(processUnmodifiedRows, 100);
 
     // Load more button
     document.getElementById('loadMoreButton')?.addEventListener('click', () => {
