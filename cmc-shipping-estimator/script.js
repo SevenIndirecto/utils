@@ -51,14 +51,15 @@
     const MODIFIER_CLASS = '_modified';
 
     function getSellerCountry(offer) {
-        const tooltipText = offer.querySelector('span.seller-name span[data-original-title]').dataset.originalTitle;
+        const tooltipText = offer.querySelector('span.seller-name span[data-bs-original-title]').dataset.bsOriginalTitle;
         return tooltipText.split(': ')[1];
     }
 
     function getPrice(offer) {
-        const priceString = offer.querySelector('.col-offer span').innerText.split(' ')[0];
+        const priceString = offer.querySelector('.col-offer span:not([data-bs-original-title])').innerText.split(' ')[0];
+        const trackedOnly = offer.querySelector('.col-offer span[data-bs-original-title]');
         const price = parseFloat(priceString.replaceAll('.', '').replace(',', '.'));
-        return price;
+        return { price, isInsuredOnly: Boolean(trackedOnly) };
     }
 
     function getShippingPrice(price, country, requiresTracking) {
@@ -75,14 +76,15 @@
         offerRow.querySelector('.col-offer').style = 'flex-wrap: wrap;';
     }
 
-    function processUnmodifiedRows() {        
+    function processUnmodifiedRows() {
+        // const articleRows = document.getElementsByClassName('article-row');
         const articleRows = document.querySelectorAll('.article-row:not(._modified)');
 
         for (const offer of articleRows) {
             try {
-                const price = getPrice(offer);
+                const { price, isInsuredOnly } = getPrice(offer);
                 const country = getSellerCountry(offer);
-                const requiresTracking = Boolean(offer.querySelector('.untracked'));
+                const requiresTracking = Boolean(offer.querySelector('.untracked')) || isInsuredOnly;
 
                 const shipping = getShippingPrice(price, country, requiresTracking);
                 if (!shipping) {
@@ -100,7 +102,7 @@
     }
 
     // On load
-    setTimeout(processUnmodifiedRows, 100);
+    processUnmodifiedRows();
 
     // Load more button
     document.getElementById('loadMoreButton')?.addEventListener('click', () => {
