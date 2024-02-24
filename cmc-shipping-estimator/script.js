@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         CMC Shipping Estimator
 // @namespace    https://github.com/SevenIndirecto/utils
-// @version      0.2.0
+// @version      0.1
 // @description  Add estimated shipping prices on Cardmarket Singles page
 // @author       Seven
 // @match        https://www.cardmarket.com/en/Magic/Products/Singles/*
@@ -58,7 +58,7 @@
     function getPrice(offer) {
         const priceString = offer.querySelector('.col-offer span:not([data-bs-original-title])').innerText.split(' ')[0];
         const trackedOnly = offer.querySelector('.col-offer span[data-bs-original-title]');
-        const sellCount = parseInt(offer.querySelector('.sell-count')?.innerText ?? '0');
+        const sellCount = parseInt(offer.querySelector('.sell-count')?.innerText.replaceAll('K', '000'));
         const price = parseFloat(priceString.replaceAll('.', '').replace(',', '.'));
         return { price, isInsuredOnly: Boolean(trackedOnly) || sellCount < 5 };
     }
