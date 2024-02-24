@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         CMC Shipping Estimator
 // @namespace    https://github.com/SevenIndirecto/utils
-// @version      0.1
+// @version      0.2.0
 // @description  Add estimated shipping prices on Cardmarket Singles page
 // @author       Seven
 // @match        https://www.cardmarket.com/en/Magic/Products/Singles/*
@@ -38,7 +38,7 @@
         'Malta': { regular: 2, tracked: 8.3 },
         'Netherlands': { regular: 1.95, tracked: 7.9 },
         'Norway': { regular: 2.81, tracked: 21.64 },
-        'Poland': { regular: 2.08, tracked: 4.69 },
+        'Poland': { regular: 2.63, tracked: 4.69 },
         'Portugal': { regular: 2.6, tracked: 6.45 },
         'Romania': { regular: 2.53, tracked: 4.96 },
         'Slovenia': { regular: 1.58, tracked: 3.18 },
@@ -58,8 +58,9 @@
     function getPrice(offer) {
         const priceString = offer.querySelector('.col-offer span:not([data-bs-original-title])').innerText.split(' ')[0];
         const trackedOnly = offer.querySelector('.col-offer span[data-bs-original-title]');
+        const sellCount = parseInt(offer.querySelector('.sell-count')?.innerText ?? '0');
         const price = parseFloat(priceString.replaceAll('.', '').replace(',', '.'));
-        return { price, isInsuredOnly: Boolean(trackedOnly) };
+        return { price, isInsuredOnly: Boolean(trackedOnly) || sellCount < 5 };
     }
 
     function getShippingPrice(price, country, requiresTracking) {
@@ -94,6 +95,11 @@
 
                 displayShippingAndTotalPrice(offer, price, shipping);
                 offer.classList.add(MODIFIER_CLASS);
+
+                // Hide sellers not selling to me.
+                if (offer.querySelector('.col-offer .btn-grey')) {
+                   offer.style.display = 'none';
+                }
             } catch (e) {
                 console.log(e);
                 continue;
