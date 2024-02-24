@@ -58,9 +58,10 @@
     function getPrice(offer) {
         const priceString = offer.querySelector('.col-offer span:not([data-bs-original-title])').innerText.split(' ')[0];
         const trackedOnly = offer.querySelector('.col-offer span[data-bs-original-title]');
-        const sellCount = parseInt(offer.querySelector('.sell-count')?.innerText.replaceAll('K', '000'));
+        const sellCountString = offer.querySelector('.sell-count')?.innerText;
+        const trackedDueToLowSellCount = parseInt(sellCountString) < 5 && !sellCountString.includes('K')
         const price = parseFloat(priceString.replaceAll('.', '').replace(',', '.'));
-        return { price, isInsuredOnly: Boolean(trackedOnly) || sellCount < 5 };
+        return { price, isInsuredOnly: Boolean(trackedOnly) || trackedDueToLowSellCount };
     }
 
     function getShippingPrice(price, country, requiresTracking) {
